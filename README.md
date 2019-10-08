@@ -2,8 +2,8 @@
 
 when changing cabal deps: `cabal2nix . > default.nix`
 
-to build: `nix-build -attr project release.nix`
-(the new executable is in bin/result/<executablename>
+to build: `nix-build --attr project release.nix`
+(the new executable is in `result/bin/nix-experiments`)
 
 to open a shell: `nix-shell'
 
