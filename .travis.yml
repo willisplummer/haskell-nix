@@ -11,4 +11,4 @@ before_install:
 - ssh-add ./deploy_key
 - ssh -i ./deploy_key root@$SERVER_IP_ADDRESS pwd
 - PATH_TO_BUILD=$(nix-build --attr project release.nix --no-out-link)
-- nix-copy-closure --to $SERVER_IP_ADDRESS --use-substitutes $PATH_TO_BUILD
+- nix-copy-closure --to root@$SERVER_IP_ADDRESS --use-substitutes $PATH_TO_BUILD
