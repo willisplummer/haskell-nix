@@ -10,3 +10,5 @@ before_install:
 - echo -e "Host $SERVER_IP_ADDRESS\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 - ssh-add ./deploy_key
 - ssh -i ./deploy_key root@$SERVER_IP_ADDRESS pwd
+- PATH_TO_BUILD=$(nix-build --attr project release.nix --no-out-link)
+- nix-copy-closure --to --use-substitutes $SERVER_IP_ADDRESS $PATH_TO_BUILD
