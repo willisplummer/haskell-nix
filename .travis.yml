@@ -14,6 +14,6 @@ before_install:
 jobs:
   include:
   - stage: build
-    script: nix-build --attr project release.nix --no-out-link
+    script: PATH_TO_BUILD=$(nix-build --attr project release.nix --no-out-link)
   - stage: deploy
-    script: nix-copy-closure --to --use-substitutes $SERVER_ADDRESS
+    script: nix-copy-closure --to --use-substitutes $SERVER_IP_ADDRESS $PATH_TO_BUILD
