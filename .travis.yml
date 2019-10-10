@@ -1,2 +1,10 @@
 language: nix
-script: nix-build --attr project release.nix
+jobs:
+  include:
+  - stage: build
+    script: nix-build --attr project release.nix --no-out-link
+  - stage: deploy
+    script: nix-copy-closure --to --use-substitutes $SERVER_ADDRESS
+before_install:
+- openssl aes-256-cbc -K $encrypted_9b425f3af6a6_key -iv $encrypted_9b425f3af6a6_iv
+  -in deploy_key.enc -out ./deploy_key -d
