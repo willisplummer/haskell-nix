@@ -9,6 +9,7 @@ module Main where
 import Data.Aeson
 import GHC.Generics
 import Network.Wai.Handler.Warp
+import Network.Wai.Logger
 import Servant
 
 type WordsAPI = "words"
@@ -26,8 +27,7 @@ handler text = pure $ Words { Main.words = Prelude.words text }
 
 main :: IO ()
 main = do
-  putStr $ "NOW RUNNING SERVER ON PORT: " <> show port
-  runSettings appSettings $ serve server handler
-    where
-      port = 8000
-      appSettings = setPort port $ setHost "0.0.0.0" $ defaultSettings
+  putStrLn "Running on port 8080"
+  withStdoutLogger $ \aplogger -> do
+    let settings = setPort 8080 $ setLogger aplogger $ defaultSettings
+    runSettings settings $ serve server handler
