@@ -17,3 +17,4 @@ jobs:
       script: PATH_TO_BUILD=$(nix-build --attr project release.nix --no-out-link)
     - stage: deploy
       script: nix-copy-closure --to root@$SERVER_IP_ADDRESS --use-substitutes $PATH_TO_BUILD
+    - script: ssh root@$SERVER_IP_ADDRESS $PATH_TO_BUILD/bin/nix-experiments

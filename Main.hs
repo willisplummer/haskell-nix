@@ -25,5 +25,9 @@ handler :: Server WordsAPI
 handler text = pure $ Words { Main.words = Prelude.words text }
 
 main :: IO ()
-main = runSettings appSettings $ serve server handler
-  where appSettings = setPort 8000 $ setHost "0.0.0.0" $ defaultSettings
+main = do
+  putStr $ "NOW RUNNING SERVER ON PORT: " <> show port
+  runSettings appSettings $ serve server handler
+    where
+      port = 8000
+      appSettings = setPort port $ setHost "0.0.0.0" $ defaultSettings
