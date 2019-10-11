@@ -12,9 +12,7 @@ import Network.Wai.Handler.Warp
 import Network.Wai.Logger
 import Servant
 
-type WordsAPI = "words"
-             :> ReqBody '[PlainText] String
-             :> Post '[JSON] Words
+type WordsAPI = "test" :> Get '[PlainText] String
 
 data Words = Words { words :: [String] }
   deriving (Eq, Show, Generic, ToJSON)
@@ -23,7 +21,7 @@ server :: Proxy WordsAPI
 server = Proxy
 
 handler :: Server WordsAPI
-handler text = pure $ Words { Main.words = Prelude.words text }
+handler = return "Hello World"
 
 main :: IO ()
 main = do
