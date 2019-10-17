@@ -14,4 +14,4 @@ before_install:
 jobs:
   include:
     - stage: build
-      script: ./release
+      script: SERVER_IP_ADDRESS=$SERVER_IP_ADDRESS ./release
