@@ -1,4 +1,4 @@
 PATH_TO_BUILD=$(nix-build --attr project release.nix --no-out-link);
 nix-copy-closure --to root@$SERVER_IP_ADDRESS $PATH_TO_BUILD;
-ssh -i ./deploy_key root@$SERVER_IP_ADDRESS tmux & my-session;
+ssh -i ./deploy_key root@$SERVER_IP_ADDRESS tmux kill-session -t my-session;
 ssh -i ./deploy_key root@$SERVER_IP_ADDRESS tmux new -d -s my-session '$PATH_TO_BUILD/bin/nix-experiments';
